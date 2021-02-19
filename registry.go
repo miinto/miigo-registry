@@ -5,12 +5,12 @@ import "errors"
 var instance *Registry
 
 type Registry struct {
-	dependencies map[string]*interface{}
+	dependencies map[string]interface{}
 }
 
-func (r *Registry) AddDependency(name string, instance *interface{}) error {
+func (r *Registry) AddDependency(name string, instance interface{}) error {
 	if r.dependencies == nil {
-		r.dependencies = make(map[string]*interface{}, 0)
+		r.dependencies = make(map[string]interface{}, 0)
 	}
 
 	if _, isOk := r.dependencies[name]; isOk {
@@ -21,7 +21,7 @@ func (r *Registry) AddDependency(name string, instance *interface{}) error {
 	return nil
 }
 
-func (r *Registry) GetDependency(name string) (*interface{},error) {
+func (r *Registry) GetDependency(name string) (interface{},error) {
 	if dep,isOk := r.dependencies[name]; isOk {
 		return dep, nil
 	}
